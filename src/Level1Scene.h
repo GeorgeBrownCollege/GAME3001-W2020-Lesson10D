@@ -3,8 +3,8 @@
 #define __LEVEL1_SCENE__
 
 #include "Scene.h"
-#include "ship.h"
-#include "Tree.h"
+#include "Player.h"
+
 
 class Level1Scene : public Scene
 {
@@ -21,9 +21,8 @@ public:
 private:
 	glm::vec2 m_mousePosition;
 
-	Ship* m_pShip;
+	Player* m_pPlayer;
 
-	Tree* m_pTree;
 };
 
 #endif /* defined (__LEVEL1_SCENE__) */

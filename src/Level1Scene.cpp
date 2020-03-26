@@ -62,26 +62,22 @@ void Level1Scene::handleEvents()
 			{
 				if(keyPressed == SDLK_w)
 				{
-					std::cout << "move forward" << std::endl;
-					m_pShip->moveForward();
+
 				}
 
 				if (keyPressed == SDLK_a)
 				{
-					std::cout << "move left" << std::endl;
-					m_pShip->turnLeft();
+
 				}
 
 				if (keyPressed == SDLK_s)
 				{
-					std::cout << "move back" << std::endl;
-					m_pShip->moveBack();
+
 				}
 
 				if (keyPressed == SDLK_d)
 				{
-					std::cout << "move right" << std::endl;
-					m_pShip->turnRight();
+
 				}
 			}
 			
@@ -92,10 +88,6 @@ void Level1Scene::handleEvents()
 
 void Level1Scene::start()
 {
-	m_pShip = new Ship();
-	m_pShip->setPosition(Config::SCREEN_WIDTH * 0.5, Config::SCREEN_HEIGHT * 0.5);
-	addChild(m_pShip);
-
-	m_pTree = new Tree(3);
-	std::cout << m_pTree->toString() << std::endl;
+	m_pPlayer = new Player();
+	addChild(m_pPlayer);
 }

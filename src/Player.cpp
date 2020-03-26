@@ -1,37 +1,40 @@
 #include "Player.h"
 #include "Game.h"
 
-Player::Player()
+Player::Player():m_currentRow(0), m_currentFrame(0)
 {
-	TheTextureManager::Instance()->load("../Assets/textures/plane.png", "player", TheGame::Instance()->getRenderer());
-	setPosition(glm::vec2(0, 430.0f));
+	TheTextureManager::Instance()->load(
+		"../Assets/sprites/megaman-idle.png",
+		"player-idle", TheGame::Instance()->getRenderer());
 
-	glm::vec2 size = TheTextureManager::Instance()->getTextureSize("player");
-	setWidth(size.x);
-	setHeight(size.y);
+	// define frameWidth
+	setWidth(81);
+
+	// define frameHeight
+	setHeight(58);
+
+	setPosition(400.0f, 300.0f);
+	setType(PLAYER);
 	setIsColliding(false);
-	setType(GameObjectType::PLAYER);
-
-	TheSoundManager::Instance()->load("../Assets/audio/engine.ogg",
-		"engine", sound_type::SOUND_MUSIC);
-
-	TheSoundManager::Instance()->playMusic("engine", -1);
 }
 
 Player::~Player()
-{
-}
+= default;
 
 void Player::draw()
 {
-	TheTextureManager::Instance()->draw("player", getPosition().x, getPosition().y, TheGame::Instance()->getRenderer(), true);
+	TheTextureManager::Instance()->drawFrame(
+		"player-idle", getPosition().x, getPosition().y,
+		getWidth(), getHeight(),
+		m_currentRow, m_currentFrame, 
+		4, 1, 0.12f,
+		TheGame::Instance()->getRenderer(),
+		0, 255, true);
+	
 }
 
 void Player::update()
 {
-	glm::vec2 mouseVector = TheGame::Instance()->getMousePosition();
-
-	setPosition(glm::vec2(mouseVector.x, getPosition().y));
 }
 
 void Player::clean()
