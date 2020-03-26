@@ -30,6 +30,9 @@ void Level1Scene::handleEvents()
 	auto wheel = 0;
 	
 	SDL_Event event;
+	SDL_Keycode keyPressed;
+	SDL_Keycode keyReleased;
+	
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -45,7 +48,7 @@ void Level1Scene::handleEvents()
 			wheel = event.wheel.y;
 			break;
 		case SDL_KEYDOWN:
-			const auto keyPressed = event.key.keysym.sym;
+			keyPressed = event.key.keysym.sym;
 			switch (keyPressed)
 			{
 			case SDLK_ESCAPE:
@@ -60,12 +63,9 @@ void Level1Scene::handleEvents()
 			}
 			// movement keys
 			{
+				//unused
+				/*
 				if(keyPressed == SDLK_w)
-				{
-
-				}
-
-				if (keyPressed == SDLK_a)
 				{
 
 				}
@@ -74,13 +74,31 @@ void Level1Scene::handleEvents()
 				{
 
 				}
+				*/
+
+				if (keyPressed == SDLK_a)
+				{
+					m_pPlayer->setAnimationState(PLAYER_RUN_LEFT);
+				}
 
 				if (keyPressed == SDLK_d)
 				{
-
+					m_pPlayer->setAnimationState(PLAYER_RUN_RIGHT);
 				}
 			}
 			
+			break;
+		case SDL_KEYUP:
+			keyReleased = event.key.keysym.sym;
+			if (keyReleased == SDLK_a)
+			{
+				m_pPlayer->setAnimationState(PLAYER_IDLE_LEFT);
+			}
+
+			if (keyReleased == SDLK_d)
+			{
+				m_pPlayer->setAnimationState(PLAYER_IDLE_RIGHT);
+			}
 			break;
 		}
 	}
